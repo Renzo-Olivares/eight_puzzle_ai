@@ -1,3 +1,5 @@
+from collections import deque
+
 def generalSearch(problem, queueingFunction):
     # Initialize queue
     frontier = deque()
