@@ -1,4 +1,7 @@
 class Problem:
+    def __init__(self, initial):
+        self.initial = initial # The problem's initial state.
+
     def isGoal(state):
         # Check if given state is a goal state.
         pass
