@@ -15,7 +15,7 @@ def generalSearch(problem, queueingFunction):
         if problem.isGoal(node.state):
             return node
         
-        nodes = queueingFunction(frontier, expand(node, problem), reached)
+        queueingFunction(frontier, expand(node, problem), reached)
     
     return 'failure'
 
