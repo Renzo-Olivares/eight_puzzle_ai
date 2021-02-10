@@ -1,3 +1,5 @@
+import random
+
 class Node:
     def __init__(self, state, parent, action, pathCost):
         self.state = state; # The state to which the node corresponds.
@@ -7,4 +9,4 @@ class Node:
     
     def __lt__(self, other):
         # Overload the less than operator. This function is called when there needs to be a tie break.
-        return other
+        return random.choice([self,other])
