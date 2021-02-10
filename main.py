@@ -53,8 +53,7 @@ def main():
     elif algorithmSelection == '2':
         solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h1)
     elif algorithmSelection == '3':
-        # solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h2)
-        pass
+        solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h2)
 
 if __name__ == "__main__":
     main()

@@ -19,12 +19,33 @@ class Heuristics:
     def h2(self, state):
         # Manhattan Distance Heuristic: The sum of the distances of the tiles from their goal positions.
         goal = self.buildGoal(state)
+        manhattanDistance = 0
 
-        # Compare goal state and given state.
-        # for i in range(len(state)):
-        #     for j in range(len(state[i])):
-        #         if state[i][j] != goal[i][j] and state[i][j] != 0:
-        pass     
+        # Calculate the manhattan distance.
+        for i in range(len(state)):
+            for j in range(len(state[i])):
+                if state[i][j] != 0:
+                    goalIndex = self.grabGoalIndex(state, state[i][j])
+                    if goalIndex[0] == i and goalIndex[1] == j:
+                        continue
+                    else:
+                        manhattanDistance += abs(goalIndex[0] - i) + abs(goalIndex[1] - j)
+        
+        return manhattanDistance
+
+    def grabGoalIndex(self, state, value):
+        # Returns the index of the desired value from the goal state.
+        counter = 1
+
+        for i in range(len(state)):
+            for j in range(len(state[i])):
+                if j == len(state[i]) - 1 and i == len(state) - 1:
+                    counter = 0
+
+                if value == counter:
+                    return [i,j]
+
+                counter += 1
 
     def buildGoal(self, state):
         # Build goal for comparison.
