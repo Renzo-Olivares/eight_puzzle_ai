@@ -37,7 +37,7 @@ def main():
         row3 = [int(i) for i in row3]
         selectedBoard = [row1, row2, row3]
     else:
-        selectedBoard = random
+        selectedBoard = depthTwenty
         print('\n' + prettyPrint(selectedBoard))
 
     problem = Problem(selectedBoard)
