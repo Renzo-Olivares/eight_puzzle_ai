@@ -1,17 +1,19 @@
 from problem import Problem
+from solver import Solver
 
-goalOne = [[1,2,3], [4,5,6], [7,8,0]]
-goalTwo = [[0,1,2], [3,4,5], [6,7,8]]
-goalOneAlternate = [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,0]]
-goalTwoAlternate = [[0,1,2,3], [4,5,6,7], [8,9,10,11], [12,13,14,15]]
-goalFailure = [[1,2,3], [4,5,0], [6,7,8]]
-goalFailureAlternate = [[0,1,2,3], [10,5,6,7], [8,9,4,11], [12,13,14,15]]
+depthZero = [[1,2,3], [4,5,6], [7,8,0]]
+depthTwo = [[1,2,3], [4,5,6], [0,7,8]]
+depthFour = [[1,2,3], [5,0,6], [4,7,8]]
+depthEight = [[1,3,6], [5,0,2], [4,7,8]]
+depthTwelve = [[1,3,6], [5,0,7], [4,8,2]]
+depthSixteen = [[1,6,7], [5,0,3], [4,8,2]]
+depthTwenty = [[7,1,2], [4,8,5], [6,3,0]]
+depthTwentyFour = [[0,7,2], [4,6,1], [3,5,8]]
 
 def main():
-    problem = Problem([[1,2,3], [4,5,6], [7,8,0]])
-    print(problem.isGoal(goalFailureAlternate))
-    print(problem.actions([[2,3,4], [6,1,7], [8,0,5]]))
-    print(problem.result([[1,2,3], [4,0,6], [7,8,5]], 'down'))
+    solver = Solver()
+    problem = Problem(depthTwentyFour)
+    print((solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction)).state)
 
 if __name__ == "__main__":
     main()

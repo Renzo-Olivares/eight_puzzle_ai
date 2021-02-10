@@ -17,10 +17,10 @@ class Problem:
             if firstPossibility == goalArr[1:]:
                 return True
         elif goalArr[len(goalArr) - 1] == 0:
-            secondPossibility = goalArr[:len(goalArr) - 2]
+            secondPossibility = goalArr[:len(goalArr) - 1]
             secondPossibility.sort()
-            
-            if secondPossibility == goalArr[:len(goalArr) - 2]:
+
+            if secondPossibility == goalArr[:len(goalArr) - 1]:
                 return True
 
         return False
@@ -44,7 +44,7 @@ class Problem:
                     # Check left direction.
                     if j - 1 >= 0:
                         actions.append('left')
-
+                    
                     return actions
                 else:
                     continue
