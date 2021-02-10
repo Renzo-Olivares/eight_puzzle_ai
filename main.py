@@ -47,9 +47,9 @@ def main():
     algorithmSelection = input('\n\t ')
 
     if algorithmSelection == '1':
-        print(solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h0).parent.state)
+        print(solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h0).state)
     elif algorithmSelection == '2':
-        print(solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h1).parent.state)
+        print(solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h1).state)
     elif algorithmSelection == '3':
         # solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h2)
         pass

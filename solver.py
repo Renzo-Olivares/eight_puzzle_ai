@@ -1,6 +1,5 @@
 from collections import deque
 from node import Node
-from heuristics import Heuristics
 
 class Solver:
     def generalSearch(self, problem, queueingFunction, heuristicFunction):
