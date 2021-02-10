@@ -1,5 +1,6 @@
 from problem import Problem
 from solver import Solver
+from heuristics import Heuristics
 
 depthZero = [[1,2,3], [4,5,6], [7,8,0]]
 depthTwo = [[1,2,3], [4,5,6], [0,7,8]]
@@ -12,8 +13,9 @@ depthTwentyFour = [[0,7,2], [4,6,1], [3,5,8]]
 
 def main():
     solver = Solver()
-    problem = Problem(depthTwentyFour)
-    print((solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction)).state)
+    problem = Problem(depthSixteen)
+    heuristics = Heuristics()
+    print((solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h0)).state)
 
 if __name__ == "__main__":
     main()

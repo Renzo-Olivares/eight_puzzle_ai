@@ -10,20 +10,20 @@ class Problem:
             for j in range(len(state[i])):
                 goalArr.append(state[i][j])
 
-        if goalArr[0] == 0:
-            firstPossibility = goalArr[1:]
-            firstPossibility.sort()
+        # if goalArr[0] == 0:
+        #     firstPossibility = goalArr[1:]
+        #     firstPossibility.sort()
 
-            if firstPossibility == goalArr[1:]:
-                return True
-        elif goalArr[len(goalArr) - 1] == 0:
+        #     if firstPossibility == goalArr[1:]:
+        #         return True
+        if goalArr[len(goalArr) - 1] == 0:
             secondPossibility = goalArr[:len(goalArr) - 1]
             secondPossibility.sort()
 
             if secondPossibility == goalArr[:len(goalArr) - 1]:
                 return True
-
-        return False
+        else:
+            return False
 
     def actions(self, state):
         # Returns the actions available to the state.
