@@ -54,5 +54,9 @@ def main():
         # solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h2)
         pass
 
+    print('To solve this problem the search algorithm expanded a total of x nodes.')
+    print('The maximum number of nodes in the queue at any one time was y.')
+    print('The depth of the goal node was z.')
+
 if __name__ == "__main__":
     main()
