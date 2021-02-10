@@ -1,6 +1,7 @@
 from problem import Problem
 from solver import Solver
 from heuristics import Heuristics
+from prettyprint import prettyPrint
 import random
 
 depthZero = [[1,2,3], [4,5,6], [7,8,0]]
@@ -11,7 +12,8 @@ depthTwelve = [[1,3,6], [5,0,7], [4,8,2]]
 depthSixteen = [[1,6,7], [5,0,3], [4,8,2]]
 depthTwenty = [[7,1,2], [4,8,5], [6,3,0]]
 depthTwentyFour = [[0,7,2], [4,6,1], [3,5,8]]
-defaultPuzzles = [depthZero, depthTwo, depthFour, depthEight, depthTwelve, depthSixteen, depthTwenty, depthTwentyFour]
+random = [[1,2,3], [4,8,0], [7,6,5]]
+defaultPuzzles = [depthZero, depthTwo, depthFour, depthEight, depthTwelve, depthSixteen, depthTwenty, depthTwentyFour, random]
 
 def main():
     # Setup
@@ -35,8 +37,8 @@ def main():
         row3 = [int(i) for i in row3]
         selectedBoard = [row1, row2, row3]
     else:
-        selectedBoard = random.choice(defaultPuzzles)
-        print(selectedBoard)
+        selectedBoard = random
+        print('\n' + prettyPrint(selectedBoard))
 
     problem = Problem(selectedBoard)
 
@@ -47,16 +49,12 @@ def main():
     algorithmSelection = input('\n\t ')
 
     if algorithmSelection == '1':
-        print(solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h0).state)
+        solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h0)
     elif algorithmSelection == '2':
-        print(solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h1).state)
+        solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h1)
     elif algorithmSelection == '3':
         # solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h2)
         pass
-
-    print('To solve this problem the search algorithm expanded a total of x nodes.')
-    print('The maximum number of nodes in the queue at any one time was y.')
-    print('The depth of the goal node was z.')
 
 if __name__ == "__main__":
     main()

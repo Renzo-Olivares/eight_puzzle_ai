@@ -1,5 +1,6 @@
 from collections import deque
 from node import Node
+from prettyprint import prettyPrint
 
 class Solver:
     def generalSearch(self, problem, queueingFunction, heuristicFunction):
@@ -10,13 +11,24 @@ class Solver:
         initialNode = Node(problem.initial, None, None, 0)
         frontier.append(initialNode)
 
+        # Trace variables
+        maxQueue = 0
+
         # A lookup table
         reached = {str(problem.initial) : initialNode}
 
         while len(frontier) != 0:
+            if maxQueue < len(frontier):
+                maxQueue = len(frontier)
+
             node = frontier.popleft()
+            print('\n' + prettyPrint(node.state))
 
             if problem.isGoal(node.state):
+                print('\nGoal!!')
+                print('\nTo solve this problem the search algorithm expanded a total of x nodes.')
+                print(f'The maximum number of nodes in the queue at any one time was {maxQueue}.')
+                print(f'The depth of the goal node was {node.pathCost}.')
                 return node
             
             queueingFunction(frontier, self.expand(node, problem), reached, heuristicFunction)
