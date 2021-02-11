@@ -19,8 +19,6 @@ class Solver:
         reached = {str(problem.initial) : initialNode}
 
         while len(frontier) != 0:
-            nodeCount += 1
-
             if maxQueue < len(frontier):
                 maxQueue = len(frontier)
 
@@ -32,6 +30,8 @@ class Solver:
                 print(f'The maximum number of nodes in the queue at any one time was {maxQueue}.')
                 print(f'The depth of the goal node was {node.pathCost}.')
                 return node
+                
+            nodeCount += 1
 
             print(f'\nThe best state to expand with a g(n) = {node.pathCost} and h(n) = {heuristicFunction(node.state)} is...')
             print(prettyPrint(node.state) + '\tExpanding this node...')
