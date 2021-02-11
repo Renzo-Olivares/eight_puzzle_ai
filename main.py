@@ -13,7 +13,8 @@ depthSixteen = [[1,6,7], [5,0,3], [4,8,2]]
 depthTwenty = [[7,1,2], [4,8,5], [6,3,0]]
 depthTwentyFour = [[0,7,2], [4,6,1], [3,5,8]]
 randomTest = [[1,2,3], [4,8,0], [7,6,5]]
-defaultPuzzles = [depthZero, depthTwo, depthFour, depthEight, depthTwelve, depthSixteen, depthTwenty, depthTwentyFour, randomTest]
+targetPuzzle = [[1,2,3], [4,0,6], [7,5,8]]
+defaultPuzzles = [depthZero, depthTwo, depthFour, depthEight, depthTwelve, depthSixteen, depthTwenty, depthTwentyFour, randomTest, targetPuzzle]
 
 def main():
     # Setup
