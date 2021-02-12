@@ -7,14 +7,18 @@ import random
 depthZero = [[1,2,3], [4,5,6], [7,8,0]]
 depthTwo = [[1,2,3], [4,5,6], [0,7,8]]
 depthFour = [[1,2,3], [5,0,6], [4,7,8]]
+depthSeven = [[4,1,2], [5,3,0], [7,8,6]]
 depthEight = [[1,3,6], [5,0,2], [4,7,8]]
 depthTwelve = [[1,3,6], [5,0,7], [4,8,2]]
 depthSixteen = [[1,6,7], [5,0,3], [4,8,2]]
+depthSixteen2 = [[1,5,2], [4,8,7], [6,3,0]]
 depthTwenty = [[7,1,2], [4,8,5], [6,3,0]]
 depthTwentyFour = [[0,7,2], [4,6,1], [3,5,8]]
+hardPuzzle = [[8,6,7], [2,5,4], [3,0,1]]
+hardPuzzle2 = [[6,4,7], [8,5,0], [3,2,1]]
 randomTest = [[1,2,3], [4,8,0], [7,6,5]]
 targetPuzzle = [[1,2,3], [4,0,6], [7,5,8]]
-defaultPuzzles = [depthZero, depthTwo, depthFour, depthEight, depthTwelve, depthSixteen, depthTwenty, depthTwentyFour, randomTest, targetPuzzle]
+defaultPuzzles = [depthZero, depthTwo, depthFour, depthSeven, depthEight, depthTwelve, depthSixteen, depthSixteen2, depthTwenty, depthTwentyFour, randomTest, targetPuzzle]
 
 def main():
     # Setup
@@ -23,9 +27,14 @@ def main():
     heuristics = Heuristics()
     selectedBoard = None
 
+    # Trace
+    open('trace.txt', 'w').close()
+    trace = open('trace.txt', 'a')
+
     # Text line UI
     print("Welcome to Renzo's 8-puzzle solver.")
     print('Type "1" to use a default puzzle, or "2" to enter your own puzzle.')
+    trace.write("Welcome to Renzo's 8-puzzle solver.")
     puzzleSelection = input('')
 
     if puzzleSelection == '2':
@@ -38,10 +47,13 @@ def main():
         row3 = [int(i) for i in row3]
         selectedBoard = [row1, row2, row3]
     else:
-        selectedBoard = random.choice(defaultPuzzles)
+        selectedBoard = randomTest
+        # selectedBoard = random.choice(defaultPuzzles)
         print('\n' + prettyPrint(selectedBoard))
 
     problem = Problem(selectedBoard)
+
+    trace.write('\n\nPuzzle: \n' + prettyPrint(selectedBoard) + '\n')
 
     print('\n \t Enter your choice of algorithm')
     print('\t 1. Uniform Cost Search')
@@ -50,10 +62,16 @@ def main():
     algorithmSelection = input('\n\t ')
 
     if algorithmSelection == '1':
+        trace.write('\nUniform Cost Search\n')
+        trace.close()
         solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h0)
     elif algorithmSelection == '2':
+        trace.write('\nA* with the Misplaced Tile Heuristic\n')
+        trace.close()
         solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h1)
     elif algorithmSelection == '3':
+        trace.write('\nA* with the Manhattan Distance Heuristic\n')
+        trace.close()
         solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h2)
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ class Solver:
         heapq.heappush(frontier,(initialNode.pathCost + heuristicFunction(initialNode.state), initialNode))
 
         # Trace variables
+        trace = open('trace.txt', 'a')
         maxQueue = 0
         nodeCount = 0
 
@@ -26,15 +27,24 @@ class Solver:
 
             if problem.isGoal(node.state):
                 print('\nGoal!!')
+                print(prettyPrint(node.state))
                 print(f'\nTo solve this problem the search algorithm expanded a total of {nodeCount} nodes.')
                 print(f'The maximum number of nodes in the queue at any one time was {maxQueue}.')
                 print(f'The depth of the goal node was {node.pathCost}.')
+                trace.write('\nGoal!!')
+                trace.write('\n' + prettyPrint(node.state) + '\n')
+                trace.write(f'\nTo solve this problem the search algorithm expanded a total of {nodeCount} nodes.')
+                trace.write(f'\nThe maximum number of nodes in the queue at any one time was {maxQueue}.')
+                trace.write(f'\nThe depth of the goal node was {node.pathCost}.')
+                trace.close()
                 return node
                 
             nodeCount += 1
 
             print(f'\nThe best state to expand with a g(n) = {node.pathCost} and h(n) = {heuristicFunction(node.state)} is...')
             print(prettyPrint(node.state) + '\tExpanding this node...')
+            trace.write(f'\nThe best state to expand with a g(n) = {node.pathCost} and h(n) = {heuristicFunction(node.state)} is...')
+            trace.write('\n' + prettyPrint(node.state) + '\tExpanding this node...\n')
             
             queueingFunction(frontier, self.expand(node, problem), reached, heuristicFunction)
         
@@ -51,8 +61,8 @@ class Solver:
 
     def bestFirstSearchQueueingFunction(self, frontier, expandedNodes, reached, h):
         for child in expandedNodes:
-            s = child.state
-            
-            if str(s) not in reached or child.pathCost < reached[str(s)].pathCost:
-                reached[str(s)] = child
+            s = str(child.state)
+
+            if s not in reached or child.pathCost < reached[s].pathCost:
+                reached[s] = child
                 heapq.heappush(frontier, (child.pathCost + h(child.state), child))
