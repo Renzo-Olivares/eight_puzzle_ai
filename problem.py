@@ -4,23 +4,17 @@ class Problem:
 
     def isGoal(self, state):
         # Check if given state is a goal state.
-        goalArr = []
+        testState = []
 
         for i in range(len(state)):
             for j in range(len(state[i])):
-                goalArr.append(state[i][j])
+                testState.append(state[i][j])
 
-        # if goalArr[0] == 0:
-        #     firstPossibility = goalArr[1:]
-        #     firstPossibility.sort()
+        if testState[len(testState) - 1] == 0:
+            goal = testState[:len(testState) - 1]
+            goal.sort()
 
-        #     if firstPossibility == goalArr[1:]:
-        #         return True
-        if goalArr[len(goalArr) - 1] == 0:
-            secondPossibility = goalArr[:len(goalArr) - 1]
-            secondPossibility.sort()
-
-            if secondPossibility == goalArr[:len(goalArr) - 1]:
+            if goal == testState[:len(testState) - 1]:
                 return True
         else:
             return False
