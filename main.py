@@ -18,7 +18,8 @@ hardPuzzle = [[8,6,7], [2,5,4], [3,0,1]]
 hardPuzzle2 = [[6,4,7], [8,5,0], [3,2,1]]
 randomTest = [[1,2,3], [4,8,0], [7,6,5]]
 targetPuzzle = [[1,2,3], [4,0,6], [7,5,8]]
-defaultPuzzles = [depthZero, depthTwo, depthFour, depthSeven, depthEight, depthTwelve, depthSixteen, depthSixteen2, depthTwenty, depthTwentyFour, randomTest, targetPuzzle]
+unsolvablePuzzle = [[1,0,3], [2,4,5], [6,7,8]]
+defaultPuzzles = [depthZero, depthTwo, depthFour, depthSeven, depthEight, depthTwelve, depthSixteen, depthSixteen2, depthTwenty, depthTwentyFour, randomTest, targetPuzzle, hardPuzzle, hardPuzzle2, unsolvablePuzzle]
 
 def main():
     # Setup
@@ -26,10 +27,13 @@ def main():
     problem = None
     heuristics = Heuristics()
     selectedBoard = None
+    solution = None
 
     # Trace
     open('trace.txt', 'w').close()
+    open('solution.txt', 'w').close()
     trace = open('trace.txt', 'a')
+    solutionTrace = open('solution.txt', 'a')
 
     # Text line UI
     print("Welcome to Renzo's 8-puzzle solver.")
@@ -41,14 +45,13 @@ def main():
         print('\n\t Enter your puzzle, use a zero to represent the blank')
         row1 = input('\t Enter the first row, use space or tabs between numbers      ').split()
         row2 = input('\t Enter the second row, use space or tabs between numbers     ').split()
-        row3 = input('\t Enter the third row, use space or tabs between numbers      ').split()
+        row3 = input('\t Enter the third row, use sgit add pace or tabs between numbers      ').split()
         row1 = [int(i) for i in row1]
         row2 = [int(i) for i in row2]
         row3 = [int(i) for i in row3]
         selectedBoard = [row1, row2, row3]
     else:
-        selectedBoard = randomTest
-        # selectedBoard = random.choice(defaultPuzzles)
+        selectedBoard = random.choice(defaultPuzzles)
         print('\n' + prettyPrint(selectedBoard))
 
     problem = Problem(selectedBoard)
@@ -64,15 +67,40 @@ def main():
     if algorithmSelection == '1':
         trace.write('\nUniform Cost Search\n')
         trace.close()
-        solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h0)
+        solution = solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h0)
     elif algorithmSelection == '2':
         trace.write('\nA* with the Misplaced Tile Heuristic\n')
         trace.close()
-        solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h1)
+        solution = solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h1)
     elif algorithmSelection == '3':
         trace.write('\nA* with the Manhattan Distance Heuristic\n')
         trace.close()
-        solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h2)
+        solution = solver.generalSearch(problem, solver.bestFirstSearchQueueingFunction, heuristics.h2)
+
+    # Writing solution to file and command line.
+    print('The solution path:\n')
+    solutionPath = []
+
+    if solution != 'failure':
+        while True:
+            solutionPath.append(solution.state)
+            if solution.parent is None:
+                break
+            else:
+                solution = solution.parent
+    else:
+        print('\nfailure')
+        solutionTrace.write('failure')
+        solutionTrace.close()
+        exit()
+
+    solutionPath.reverse()
+
+    for board in solutionPath:
+        solutionTrace.write(prettyPrint(board) + '\n\n')
+        print(prettyPrint(board) + '\n')
+    
+    solutionTrace.close()
 
 if __name__ == "__main__":
     main()

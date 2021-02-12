@@ -30,7 +30,7 @@ class Solver:
                 print(prettyPrint(node.state))
                 print(f'\nTo solve this problem the search algorithm expanded a total of {nodeCount} nodes.')
                 print(f'The maximum number of nodes in the queue at any one time was {maxQueue}.')
-                print(f'The depth of the goal node was {node.pathCost}.')
+                print(f'The depth of the goal node was {node.pathCost}.\n')
                 trace.write('\nGoal!!')
                 trace.write('\n' + prettyPrint(node.state) + '\n')
                 trace.write(f'\nTo solve this problem the search algorithm expanded a total of {nodeCount} nodes.')
