@@ -38,7 +38,7 @@ def main():
 
     # Text line UI
     print("Welcome to Renzo's 8-puzzle solver.")
-    print('Type "1" to use a default puzzle, or "2" to enter your own puzzle.')
+    print('Type "1" to use a default random puzzle, or "2" to enter your own puzzle.')
     trace.write("Welcome to Renzo's 8-puzzle solver.")
     puzzleSelection = input('')
 
@@ -52,8 +52,7 @@ def main():
         row3 = [int(i) for i in row3]
         selectedBoard = [row1, row2, row3]
     else:
-        selectedBoard = depthSixteen
-        # selectedBoard = random.choice(defaultPuzzles)
+        selectedBoard = random.choice(defaultPuzzles)
         print('\n' + prettyPrint(selectedBoard))
 
     problem = Problem(selectedBoard)
