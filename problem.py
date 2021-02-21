@@ -44,7 +44,7 @@ class Problem:
                     continue
 
     def result(self, state, action):
-        # A transitional model, returns the state that results from doing action a on state s.
+        # From Artificial Intelligence: A Modern Approach: "A transitional model, returns the state that results from doing action a on state s"[1].
         for i in range(len(state)):
             for j in range(len(state[i])):
                 if state[i][j] == 0:
@@ -70,5 +70,9 @@ class Problem:
                     continue
 
     def actionCost(self, state, action, newState):
-        # Returns the numeric cost of applying action a on state s to reach state s'.
+        # From Artificial Intelligence: A Modern Approach: "Returns the numeric cost of applying action a on state s to reach state s'"[1].
         return 1
+
+# Sources
+# Comments are from textbook [1], code is my own.
+#[1] Artificial Intelligence: A Modern Approach (by Stuart Russell and Peter Norvig, 2020, Pearson, 0-13-461099-7)

@@ -4,6 +4,7 @@ from prettyprint import prettyPrint
 
 class Solver:
     def generalSearch(self, problem, queueingFunction, heuristicFunction):
+        # Source: Derived from general search algorithm given in class[2], and Best-First-Search pseudocode given in Artificial Intelligence: A Modern Approach [1]
         # Initialize queue
         frontier = []
 
@@ -51,6 +52,7 @@ class Solver:
         return 'failure'
 
     def expand(self, node, problem):
+        # Source: Derived from pseudocode found in [1]
         s = node.state
 
         for action in problem.actions(s):
@@ -60,9 +62,14 @@ class Solver:
             yield Node(sNew, node, action, cost)
 
     def bestFirstSearchQueueingFunction(self, frontier, expandedNodes, reached, h):
+        # Source: Derived from pseudocode found in [1]
         for child in expandedNodes:
             s = str(child.state)
 
             if s not in reached or child.pathCost < reached[s].pathCost:
                 reached[s] = child
                 heapq.heappush(frontier, (child.pathCost + h(child.state), child))
+
+# Sources
+#[1] Artificial Intelligence: A Modern Approach (by Stuart Russell and Peter Norvig, 2020, Pearson, 0-13-461099-7)
+#[2] Blind Search and Heuristic Search Class Slides (by Dr. Eamonn Keogh) 

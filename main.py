@@ -4,6 +4,7 @@ from heuristics import Heuristics
 from prettyprint import prettyPrint
 import random
 
+# Here are the test cases given by Dr. Keogh
 depthZero = [[1,2,3], [4,5,6], [7,8,0]]
 depthTwo = [[1,2,3], [4,5,6], [0,7,8]]
 depthFour = [[1,2,3], [5,0,6], [4,7,8]]
@@ -14,8 +15,8 @@ depthSixteen = [[1,6,7], [5,0,3], [4,8,2]]
 depthSixteen2 = [[1,5,2], [4,8,7], [6,3,0]]
 depthTwenty = [[7,1,2], [4,8,5], [6,3,0]]
 depthTwentyFour = [[0,7,2], [4,6,1], [3,5,8]]
-hardPuzzle = [[8,6,7], [2,5,4], [3,0,1]]
-hardPuzzle2 = [[6,4,7], [8,5,0], [3,2,1]]
+hardPuzzle = [[8,6,7], [2,5,4], [3,0,1]]#depth 31
+hardPuzzle2 = [[6,4,7], [8,5,0], [3,2,1]]#depth 31
 randomTest = [[1,2,3], [4,8,0], [7,6,5]]
 targetPuzzle = [[1,2,3], [4,0,6], [7,5,8]]
 unsolvablePuzzle = [[1,0,3], [2,4,5], [6,7,8]]
@@ -51,7 +52,8 @@ def main():
         row3 = [int(i) for i in row3]
         selectedBoard = [row1, row2, row3]
     else:
-        selectedBoard = random.choice(defaultPuzzles)
+        selectedBoard = depthSixteen
+        # selectedBoard = random.choice(defaultPuzzles)
         print('\n' + prettyPrint(selectedBoard))
 
     problem = Problem(selectedBoard)

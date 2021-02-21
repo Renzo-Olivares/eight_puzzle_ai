@@ -4,7 +4,7 @@ class Heuristics:
         return 0
         
     def h1(self, state):
-        # Misplaced Tile Heuristic: The number of misplaced tiles (blank not included).
+        # Misplaced Tile Heuristic: From Artificial Intelligence: A Modern Approach, "The number of misplaced tiles (blank not included)"[1].
         misplacedCount = 0
         goal = self.buildGoal(state)
 
@@ -17,7 +17,7 @@ class Heuristics:
         return misplacedCount
 
     def h2(self, state):
-        # Manhattan Distance Heuristic: The sum of the distances of the tiles from their goal positions.
+        # Manhattan Distance Heuristic: From Artificial Intelligence: A Modern Approach, "The sum of the distances of the tiles from their goal positions"[1].
         goal = self.buildGoal(state)
         manhattanDistance = 0
 
@@ -66,3 +66,7 @@ class Heuristics:
                     temp.clear()
         
         return goal
+
+# Sources
+# Comments are from textbook [1], code is my own.
+#[1] Artificial Intelligence: A Modern Approach (by Stuart Russell and Peter Norvig, 2020, Pearson, 0-13-461099-7)
